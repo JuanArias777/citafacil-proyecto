@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitaFácil - Sistema de Agendamiento de Citas</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- BARRA LATERAL DE NAVEGACIÓN -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h2>CitaFácil</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="tab-btn active" data-target="servicios"><i class="fa-solid fa-concierge-bell"></i> Servicios</a></li>
+            <li><a href="#" class="tab-btn" data-target="agendar"><i class="fa-solid fa-calendar-plus"></i> Agendar Cita</a></li>
+            <li><a href="#" class="tab-btn" data-target="mis-citas"><i class="fa-solid fa-list-check"></i> Mis Citas</a></li>
+        </ul>
+        <div class="user-profile">
+            <i class="fa-solid fa-user-circle"></i>
+            <span>Usuario ADSO</span>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+        <header>
+            <h1>Panel de Control</h1>
+            <p>Bienvenido a CitaFácil, gestiona tus citas de forma rápida y organizada.</p>
+        </header>
+
+        <!-- PESTAÑA 1: SERVICIOS -->
+        <section id="servicios" class="tab-content active">
+            <h2>Servicios Disponibles</h2>
+            <p class="section-desc">Explora los servicios ofrecidos por nuestros proveedores profesionales.</p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=500&q=80" alt="Estética">
+                    <div class="card-body">
+                        <h3>Asesoría en Imagen y Estética</h3>
+                        <p>Cuidado capilar y estilismo profesional con expertos certificados.</p>
+                        <span class="price">$45.000 COP</span>
+                        <button class="btn-primary select-service" data-service="Asesoría en Imagen y Estética">Seleccionar</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=500&q=80" alt="Spa">
+                    <div class="card-body">
+                        <h3>Sesión de Spa y Masajes</h3>
+                        <p>Relajación profunda y terapias antiestrés personalizadas.</p>
+                        <span class="price">$70.000 COP</span>
+                        <button class="btn-primary select-service" data-service="Sesión de Spa y Masajes">Seleccionar</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=500&q=80" alt="Entrenamiento">
+                    <div class="card-body">
+                        <h3>Entrenamiento Personalizado</h3>
+                        <p>Rutinas de acondicionamiento físico adaptadas a tus metas.</p>
+                        <span class="price">$50.000 COP</span>
+                        <button class="btn-primary select-service" data-service="Entrenamiento Personalizado">Seleccionar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 2: AGENDAR CITA -->
+        <section id="agendar" class="tab-content">
+            <h2>Formulario de Agendamiento</h2>
+            <p class="section-desc">Completa los datos para reservar tu espacio con el proveedor.</p>
+
+            <form id="booking-form" class="form-container">
+                <div class="form-group">
+                    <label for="service-input">Servicio Seleccionado:</label>
+                    <input type="text" id="service-input" readonly placeholder="Selecciona un servicio primero en la pestaña Servicios">
+                </div>
+
+                <div class="form-group">
+                    <label for="date-input">Fecha de la Cita:</label>
+                    <input type="date" id="date-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time-input">Horario Disponible:</label>
+                    <select id="time-input" required>
+                        <option value="">-- Seleccione un horario --</option>
+                        <option value="08:00 AM">08:00 AM - 09:00 AM</option>
+                        <option value="10:00 AM">10:00 AM - 11:00 AM</option>
+                        <option value="02:00 PM">02:00 PM - 03:00 PM</option>
+                        <option value="04:00 PM">04:00 PM - 05:00 PM</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Confirmar y Agendar Cita</button>
+            </form>
+        </section>
+
+        <!-- PESTAÑA 3: MIS CITAS -->
+        <section id="mis-citas" class="tab-content">
+            <h2>Historial de Mis Citas</h2>
+            <p class="section-desc">Consulta el estado actual de tus reservas programadas.</p>
+
+            <div class="table-responsive">
+                <table id="appointments-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Servicio</th>
+                            <th>Fecha</th>
+                            <th>Horario</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#001</td>
+                            <td>Asesoría en Imagen y Estética</td>
+                            <td>2026-10-15</td>
+                            <td>10:00 AM</td>
+                            <td><span class="badge confirmed">Confirmada</span></td>
+                            <td><button class="btn-danger cancel-btn">Cancelar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- ARCHIVO JS -->
+    <script src="script.js"></script>
+</body>
+</html>
