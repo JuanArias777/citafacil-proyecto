@@ -1,0 +1,17 @@
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Configuración local de editores
+.vscode/
+.idea/
+
+# Dependencias y salidas generadas si se agregan en el futuro
+node_modules/
+dist/
+coverage/
+
+# Archivos temporales
+*.bak
+*.tmp

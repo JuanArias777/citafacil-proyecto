@@ -1,0 +1,56 @@
+/* CitaFácil: estilos propios organizados por componentes. */
+:root {
+  --cf-ink: #14233b;
+  --cf-muted: #64748b;
+  --cf-primary: #2363eb;
+  --cf-primary-dark: #1747b8;
+  --cf-mint: #74e2ce;
+  --cf-background: #f4f7fb;
+  --cf-border: #e4eaf2;
+}
+* { box-sizing: border-box; }
+body { min-height: 100vh; background: var(--cf-background); color: var(--cf-ink); font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+.app-navbar { background: #101c31; }
+.navbar-brand { letter-spacing: -.04em; font-size: 1.45rem; }
+.navbar-brand span { color: var(--cf-mint); }
+.page-header { color: white; background: radial-gradient(circle at 85% 20%, rgb(116 226 206 / 18%), transparent 27%), linear-gradient(120deg, #14233b, #1d3e6d); }
+.page-header .lead { max-width: 680px; color: #d4deed; }
+.page-header h1 span { color: var(--cf-mint); }
+.eyebrow { color: #138c83; font-size: .72rem; font-weight: 800; letter-spacing: .13em; }
+.page-header .eyebrow { color: var(--cf-mint); }
+.summary-card { display: flex; flex-direction: column; gap: .25rem; padding: 1.35rem; border: 1px solid rgb(255 255 255 / 18%); border-radius: 1rem; background: rgb(255 255 255 / 9%); }
+.summary-label, .summary-note { color: #d4deed; font-size: .86rem; }
+.summary-card strong { font-size: 2.8rem; line-height: 1.1; }
+.panel { overflow: hidden; border: 1px solid var(--cf-border); border-radius: 1rem; background: white; box-shadow: 0 10px 35px rgb(20 35 59 / 5%); }
+.panel-heading { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.4rem; border-bottom: 1px solid var(--cf-border); }
+.panel-heading .eyebrow { margin-bottom: .25rem; }
+.form-label { color: #34445e; font-size: .9rem; font-weight: 650; }
+.form-control, .form-select { min-height: 44px; border-color: #d8e1ec; border-radius: .65rem; }
+textarea.form-control { min-height: auto; }
+.form-control:focus, .form-select:focus { border-color: #8eafff; box-shadow: 0 0 0 .2rem rgb(35 99 235 / 12%); }
+.btn { border-radius: .65rem; font-weight: 650; }
+.btn-primary { border-color: var(--cf-primary); background: var(--cf-primary); }
+.btn-primary:hover { border-color: var(--cf-primary-dark); background: var(--cf-primary-dark); }
+.filter-wrap { min-width: 175px; }
+.table thead th { padding: .9rem .8rem; background: #f8fafc; color: #66758b; font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.table tbody td { padding: 1rem .8rem; font-size: .9rem; }
+.cita-nombre { min-width: 150px; color: var(--cf-ink); font-weight: 750; }
+.cita-detalle { display: block; max-width: 200px; overflow-wrap: anywhere; color: var(--cf-muted); font-size: .78rem; font-weight: 400; }
+.estado { display: inline-block; padding: .3rem .55rem; border-radius: 999px; font-size: .72rem; font-weight: 750; white-space: nowrap; }
+.estado-pendiente { background: #fff4d6; color: #875b00; }
+.estado-confirmada { background: #dcfce7; color: #166534; }
+.estado-cancelada { background: #fee2e2; color: #991b1b; }
+.acciones { display: flex; flex-wrap: wrap; gap: .35rem; min-width: 115px; }
+.acciones .btn { padding: .3rem .5rem; font-size: .75rem; }
+.empty-state { padding: 2.4rem 1rem; text-align: center; }
+.empty-icon { margin-bottom: .5rem; color: #9aa9bd; font-size: 2.2rem; }
+.help-panel { padding: 1.5rem; border: 1px solid var(--cf-border); border-radius: 1rem; background: white; }
+.feature-item { height: 100%; padding: 1rem; border: 1px solid var(--cf-border); border-radius: .75rem; background: #fbfdff; }
+.feature-item strong { color: var(--cf-primary); }
+.feature-item p { margin: .4rem 0 0; color: var(--cf-muted); font-size: .9rem; }
+.app-footer { margin-top: 2rem; padding: 1.25rem 0; background: #101c31; color: #d4deed; font-size: .85rem; }
+@media (max-width: 575.98px) {
+  .panel-heading { align-items: flex-start; flex-direction: column; }
+  .filter-wrap { width: 100%; }
+  .table tbody td { padding: .8rem .55rem; }
+}

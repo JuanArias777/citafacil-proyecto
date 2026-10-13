@@ -1,141 +1,141 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CitaFácil - Sistema de Agendamiento de Citas</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Módulo frontend de CitaFácil para gestionar citas.">
+  <title>CitaFácil | Gestión de citas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/app.js" defer></script>
 </head>
 <body>
+  <nav class="navbar navbar-dark app-navbar">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Cita<span>Fácil</span></a>
+      <span class="navbar-text text-white-50">Módulo de gestión de citas</span>
+    </div>
+  </nav>
 
-    <!-- BARRA LATERAL DE NAVEGACIÓN -->
-    <aside class="sidebar">
-        <div class="logo">
-            <i class="fa-solid fa-calendar-check"></i>
-            <h2>CitaFácil</h2>
+  <header class="page-header">
+    <div class="container py-4 py-md-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <p class="eyebrow">PROYECTO FORMATIVO · ADSO</p>
+          <h1 class="display-5 fw-bold">Administra tus citas <span>fácilmente</span></h1>
+          <p class="lead">Registra, consulta, edita y cancela citas desde una sola pantalla.</p>
         </div>
-        <ul class="nav-links">
-            <li><a href="#" class="tab-btn active" data-target="servicios"><i class="fa-solid fa-concierge-bell"></i> Servicios</a></li>
-            <li><a href="#" class="tab-btn" data-target="agendar"><i class="fa-solid fa-calendar-plus"></i> Agendar Cita</a></li>
-            <li><a href="#" class="tab-btn" data-target="mis-citas"><i class="fa-solid fa-list-check"></i> Mis Citas</a></li>
-        </ul>
-        <div class="user-profile">
-            <i class="fa-solid fa-user-circle"></i>
-            <span>Usuario ADSO</span>
+        <div class="col-lg-4">
+          <div class="summary-card">
+            <span class="summary-label">Citas registradas</span>
+            <strong id="total-citas">0</strong>
+            <span class="summary-note">Guardadas en este navegador</span>
+          </div>
         </div>
-    </aside>
+      </div>
+    </div>
+  </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-content">
-        <header>
-            <h1>Panel de Control</h1>
-            <p>Bienvenido a CitaFácil, gestiona tus citas de forma rápida y organizada.</p>
-        </header>
+  <main class="container py-4 py-md-5">
+    <div class="alert alert-info small" role="note">
+      <strong>Versión académica:</strong> esta demostración guarda datos en el navegador.
+      Todavía no usa un servidor, autenticación ni la base de datos MySQL.
+    </div>
+    <div id="mensaje-app" class="alert d-none" role="status" aria-live="polite"></div>
 
-        <!-- PESTAÑA 1: SERVICIOS -->
-        <section id="servicios" class="tab-content active">
-            <h2>Servicios Disponibles</h2>
-            <p class="section-desc">Explora los servicios ofrecidos por nuestros proveedores profesionales.</p>
-            
-            <div class="cards-grid">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=500&q=80" alt="Estética">
-                    <div class="card-body">
-                        <h3>Asesoría en Imagen y Estética</h3>
-                        <p>Cuidado capilar y estilismo profesional con expertos certificados.</p>
-                        <span class="price">$45.000 COP</span>
-                        <button class="btn-primary select-service" data-service="Asesoría en Imagen y Estética">Seleccionar</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=500&q=80" alt="Spa">
-                    <div class="card-body">
-                        <h3>Sesión de Spa y Masajes</h3>
-                        <p>Relajación profunda y terapias antiestrés personalizadas.</p>
-                        <span class="price">$70.000 COP</span>
-                        <button class="btn-primary select-service" data-service="Sesión de Spa y Masajes">Seleccionar</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=500&q=80" alt="Entrenamiento">
-                    <div class="card-body">
-                        <h3>Entrenamiento Personalizado</h3>
-                        <p>Rutinas de acondicionamiento físico adaptadas a tus metas.</p>
-                        <span class="price">$50.000 COP</span>
-                        <button class="btn-primary select-service" data-service="Entrenamiento Personalizado">Seleccionar</button>
-                    </div>
-                </div>
+    <div class="row g-4">
+      <section class="col-lg-5" aria-labelledby="titulo-formulario">
+        <div class="panel h-100">
+          <div class="panel-heading">
+            <div><p class="eyebrow mb-1">NUEVA GESTIÓN</p><h2 id="titulo-formulario" class="h4 mb-0">Registrar una cita</h2></div>
+          </div>
+          <form id="form-cita" class="p-3 p-md-4" novalidate>
+            <input type="hidden" id="id-cita">
+            <div class="mb-3">
+              <label for="nombre-cliente" class="form-label">Nombre del cliente</label>
+              <input type="text" class="form-control" id="nombre-cliente" maxlength="100" required>
+              <div class="invalid-feedback">Escribe el nombre del cliente.</div>
             </div>
-        </section>
-
-        <!-- PESTAÑA 2: AGENDAR CITA -->
-        <section id="agendar" class="tab-content">
-            <h2>Formulario de Agendamiento</h2>
-            <p class="section-desc">Completa los datos para reservar tu espacio con el proveedor.</p>
-
-            <form id="booking-form" class="form-container">
-                <div class="form-group">
-                    <label for="service-input">Servicio Seleccionado:</label>
-                    <input type="text" id="service-input" readonly placeholder="Selecciona un servicio primero en la pestaña Servicios">
-                </div>
-
-                <div class="form-group">
-                    <label for="date-input">Fecha de la Cita:</label>
-                    <input type="date" id="date-input" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="time-input">Horario Disponible:</label>
-                    <select id="time-input" required>
-                        <option value="">-- Seleccione un horario --</option>
-                        <option value="08:00 AM">08:00 AM - 09:00 AM</option>
-                        <option value="10:00 AM">10:00 AM - 11:00 AM</option>
-                        <option value="02:00 PM">02:00 PM - 03:00 PM</option>
-                        <option value="04:00 PM">04:00 PM - 05:00 PM</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-submit">Confirmar y Agendar Cita</button>
-            </form>
-        </section>
-
-        <!-- PESTAÑA 3: MIS CITAS -->
-        <section id="mis-citas" class="tab-content">
-            <h2>Historial de Mis Citas</h2>
-            <p class="section-desc">Consulta el estado actual de tus reservas programadas.</p>
-
-            <div class="table-responsive">
-                <table id="appointments-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Servicio</th>
-                            <th>Fecha</th>
-                            <th>Horario</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#001</td>
-                            <td>Asesoría en Imagen y Estética</td>
-                            <td>2026-10-15</td>
-                            <td>10:00 AM</td>
-                            <td><span class="badge confirmed">Confirmada</span></td>
-                            <td><button class="btn-danger cancel-btn">Cancelar</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="mb-3">
+              <label for="servicio" class="form-label">Servicio</label>
+              <select class="form-select" id="servicio" required>
+                <option value="">Selecciona un servicio</option>
+                <option>Consulta general</option><option>Asesoría</option>
+                <option>Mantenimiento</option><option>Otro servicio</option>
+              </select>
+              <div class="invalid-feedback">Selecciona un servicio.</div>
             </div>
-        </section>
-    </main>
+            <div class="row g-3">
+              <div class="col-sm-6 mb-3">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="fecha" required>
+                <div class="invalid-feedback">Selecciona una fecha válida.</div>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <label for="hora" class="form-label">Hora</label>
+                <input type="time" class="form-control" id="hora" required>
+                <div class="invalid-feedback">Selecciona una hora.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="observaciones" class="form-label">Observaciones <span class="text-secondary">(opcional)</span></label>
+              <textarea class="form-control" id="observaciones" rows="3" maxlength="500"></textarea>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="submit" class="btn btn-primary flex-grow-1" id="btn-guardar">Guardar cita</button>
+              <button type="button" class="btn btn-outline-secondary d-none" id="btn-cancelar-edicion">Salir de edición</button>
+              <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
+            </div>
+          </form>
+        </div>
+      </section>
 
-    <!-- ARCHIVO JS -->
-    <script src="script.js"></script>
+      <section class="col-lg-7" aria-labelledby="titulo-listado">
+        <div class="panel">
+          <div class="panel-heading flex-wrap gap-3">
+            <div><p class="eyebrow mb-1">AGENDA</p><h2 id="titulo-listado" class="h4 mb-0">Citas registradas</h2></div>
+            <div class="filter-wrap">
+              <label for="filtro-estado" class="visually-hidden">Filtrar por estado</label>
+              <select id="filtro-estado" class="form-select form-select-sm">
+                <option value="todas">Todos los estados</option>
+                <option value="Pendiente">Pendientes</option>
+                <option value="Confirmada">Confirmadas</option>
+                <option value="Cancelada">Canceladas</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead><tr><th>Cita</th><th>Fecha y hora</th><th>Estado</th><th>Acciones</th></tr></thead>
+              <tbody id="lista-citas"></tbody>
+            </table>
+          </div>
+          <div id="estado-vacio" class="empty-state">
+            <div class="empty-icon" aria-hidden="true">▦</div>
+            <h3 class="h6">Todavía no hay citas</h3>
+            <p class="text-secondary mb-0">Completa el formulario para registrar la primera.</p>
+          </div>
+        </div>
+        <p class="small text-secondary mt-3">Las citas permanecen en este navegador hasta que se borren sus datos locales.</p>
+      </section>
+    </div>
+
+    <section class="mt-4 help-panel">
+      <h2 class="h5">Funciones incluidas</h2>
+      <div class="row g-3">
+        <div class="col-md-4"><div class="feature-item"><strong>01 · Crear</strong><p>Registra citas con validación de campos.</p></div></div>
+        <div class="col-md-4"><div class="feature-item"><strong>02 · Editar</strong><p>Actualiza una cita existente.</p></div></div>
+        <div class="col-md-4"><div class="feature-item"><strong>03 · Cancelar</strong><p>Cambia el estado sin borrar el historial.</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span><strong>CitaFácil</strong> · Proyecto formativo ADSO</span>
+      <span>GA7-220501096-AA3-EV01</span>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
