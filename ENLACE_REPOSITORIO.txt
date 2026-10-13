@@ -1,6 +1,1 @@
-ENLACE DEL REPOSITORIO GITHUB
-
-Después de crear el repositorio y ejecutar git push, reemplaza este texto por la URL real.
-
-Ejemplo de formato (no es un enlace real):
-https://github.com/TU-USUARIO/CitaFacil
+https://github.com/JuanArias777/citafacil-proyecto.git
